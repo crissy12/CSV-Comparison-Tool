@@ -1,33 +1,38 @@
 from struct import pack
 from tkinter import *
+from tkinter import filedialog as fd
+import tkinter
 from tkinter.ttk import *
 
+csvfiles = []
 
 root = Tk()
-root.geometry('300x300')
+root.geometry('200x100')
 label = Label(root, text="CSV Selector")
 root.title('CSV Comparison Tool')
 
 
-def OpenWindow(WindowName):
+def file_selection():
+    filetypes = (
+        ('text files', '*.txt'),
+        ('All files', '*.*')
+    )
 
-    newWindow = Toplevel(root)
+    filename = fd.askopenfilename(
+        title='Open a file',
+        initialdir='/',
+        filetypes=filetypes)
+    
+    csvfiles.append(filename)
 
-    newWindow.title(WindowName)
+button1 = Button(root, text = 'Select your first CSV', command = file_selection)
+button2 = Button(root, text = 'Select your second CSV', command = file_selection)
+button3 = Button(root, text = 'Process Files / Close Window', command = root.destroy)
 
-    newWindow.geometry('200x200')
+button1.pack(side=tkinter.TOP)
+button2.pack(side=tkinter.TOP)
+button3.pack(side=tkinter.BOTTOM)  
 
-    Label(newWindow,text = 'Select the CSV File you need').pack()
+root.mainloop()
 
-    button = Button(root, text = 'Open FIle', command = )
-
-
-
-button = Button(root, text = 'Select your first CSV', command = lambda: OpenWindow('Select the 1st CSV File'))
-button = Button(root, text = 'Select your second CSV', command = lambda: OpenWindow('Select the 2nd CSV File'))
-
-button.pack(pady=10)
-
-
-
-mainloop()
+print(csvfiles)
