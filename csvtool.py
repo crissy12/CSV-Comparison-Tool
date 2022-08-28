@@ -12,7 +12,7 @@ csvfiles = []
 regex = re.compile(r'([A-Za-z0-9]+[.-_])*[A-Za-z0-9]+@[A-Za-z0-9-]+(\.[A-Z|a-z]{2,})+')
 
 root = Tk()
-root.geometry('200x100')
+root.geometry('300x100')
 label = Label(root, text="CSV Selector")
 root.title('CSV Comparison Tool')
 fusemail_emails = []
