@@ -1,12 +1,9 @@
-from email import message
-from struct import pack
 from tkinter import *
 from tkinter import filedialog as fd
 import tkinter
 from tkinter.ttk import *
 import csv
 import re
-from types import NoneType
 import os
 
 '''
@@ -62,19 +59,24 @@ def get_info(list_to_use,filename):
 #Process the arrays and checks if there are emails in the fusemail array that are not in the active emails array.
 def process_files():
     with open('results.txt','w') as output:
-        output.write('******************************************************************************\n')
+        output.write('Save this file to a directory of choice\n******************************************************************************\n')
         output.write('Items to remove from Fusemail\n******************************************************************************\n')
         for fusemail_item in fusemail_emails:
             if fusemail_item not in active_emails:
                 output.write (fusemail_item)
                 output.write('\n')
     os.startfile('results.txt')
+
+# Closes program and deletes the output file for next run.
+def close_program():
+    os.remove('results.txt')
+    root.destroy
     
 # Button declarations
 first_csv_button = Button(root, text = 'Select CSV from Fusemail', command = fusemail_action)
 second_csv_button = Button(root, text = 'Select CSV from 365', command = active_action)
 submit_button = Button(root, text = 'Submit/Process', command = process_files)
-close_button = Button(root, text = 'Close Window', command = root.destroy)
+close_button = Button(root, text = 'Close Window', command = close_program)
 # Button positioning 
 first_csv_button.pack(side=tkinter.TOP)
 second_csv_button.pack(side=tkinter.TOP)
